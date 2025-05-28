@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DwC-DP Mermaid Visualizer</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; }
+    #mermaid { background: #f9f9f9; padding: 1rem; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <h1>Darwin Core Data Package (DwC-DP) Mermaid Visualizer</h1>
+  <p>Select a <code>datapackage.json</code> file to generate a Mermaid diagram of table relationships.</p>
+
+  <input type="file" id="fileInput" accept="application/json" />
+  <pre id="mermaid" class="mermaid"></pre>
+
+  <script>
+    mermaid.initialize({ startOnLoad: false });
+
+    document.getElementById('fileInput').addEventListener('change', async (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const text = await file.text();
+      const json = JSON.parse(text);
+
+      const resources = json.resources || [];
+      const nodes = new Set();
+      const edges = [];
+
+      resources.forEach(resource => {
+        const source = resource.name;
+        nodes.add(source);
+
+        const fks = resource.schema?.foreignKeys || [];
+        fks.forEach(fk => {
+          const target = fk.reference.resource;
+          const field = Array.isArray(fk.fields) ? fk.fields.join(", ") : fk.fields;
+          edges.push(`    ${source}-->|${field}|${target}`);
+          nodes.add(target);
+        });
+      });
+
+      const diagram = ["flowchart LR", ...Array.from(nodes).map(n => `    ${n}`), ...edges].join("\n");
+      document.getElementById('mermaid').textContent = diagram;
+      mermaid.contentLoaded();
+    });
+  </script>
+</body>
+</html>
