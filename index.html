@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DwC-DP Mermaid Visualizer</title>
-  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
   <style>
     body { font-family: sans-serif; margin: 2rem; }
-    #mermaid { background: #f9f9f9; padding: 1rem; border: 1px solid #ccc; }
+    #diagramContainer { background: #f9f9f9; padding: 1rem; border: 1px solid #ccc; }
   </style>
 </head>
 <body>
@@ -15,7 +15,9 @@
   <p>Select a <code>datapackage.json</code> file to generate a Mermaid diagram of table relationships.</p>
 
   <input type="file" id="fileInput" accept="application/json" />
-  <pre id="mermaid" class="mermaid"></pre>
+  <div id="diagramContainer">
+    <div class="mermaid" id="mermaid"></div>
+  </div>
 
   <script>
     mermaid.initialize({ startOnLoad: false });
@@ -45,8 +47,10 @@
       });
 
       const diagram = ["flowchart LR", ...Array.from(nodes).map(n => `    ${n}`), ...edges].join("\n");
-      document.getElementById('mermaid').textContent = diagram;
-      mermaid.contentLoaded();
+      const container = document.getElementById("mermaid");
+      container.removeAttribute("data-processed");
+      container.innerHTML = diagram;
+      mermaid.init(undefined, container);
     });
   </script>
 </body>
