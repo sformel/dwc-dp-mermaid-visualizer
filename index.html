@@ -48,7 +48,7 @@
         fks.forEach(fk => {
           const target = fk.reference.resource;
           const field = Array.isArray(fk.fields) ? fk.fields.join(", ") : fk.fields;
-          edges.push(`    ${source}-->|${field}|${target}`);
+          edges.push(`    ${source}---|${field}|${target}`);
           nodes.add(target);
         });
       });
