@@ -30,6 +30,13 @@
       const json = JSON.parse(text);
 
       const resources = json.resources || [];
+
+      if (!Array.isArray(resources) || resources.length === 0) {
+        document.getElementById("mermaid").innerHTML = "⚠️ No resources found in the JSON file.";
+      return;
+      }
+
+      
       const nodes = new Set();
       const edges = [];
 
