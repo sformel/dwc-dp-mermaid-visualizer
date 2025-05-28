@@ -53,7 +53,7 @@
         });
       });
 
-      const diagram = ["flowchart LR", ...Array.from(nodes).map(n => `    ${n}`), ...edges].join("\n");
+      const diagram = ["flowchart LR", ...Array.from(nodes).map(n <=> `    ${n}`), ...edges].join("\n");
       const container = document.getElementById("mermaid");
       container.removeAttribute("data-processed");
       container.innerHTML = diagram;
