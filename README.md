@@ -34,4 +34,4 @@ This lightweight, browser-based tool lets you **visualize table relationships in
 
 ## 💡 Example Input
 
-Upload a DwC-DP `datapackage.json` file. Example of [BROKE-West data test](example/datapackage-broke-west-fish-v9.json).
+Upload a DwC-DP `datapackage.json` file. [Example file](example/datapackage.json).
