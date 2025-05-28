@@ -1,0 +1,513 @@
+{
+  "name": "dwc-data-package",
+  "title": "Darwin Core Data Package",
+  "description": "A data package containing Darwin Core related tables for molecular data.",
+  "resources": [
+    {
+      "name": "event",
+      "path": "data/event.tsv",
+      "schema": {
+        "name": "event",
+        "identifier": "http://rs.tdwg.org/dwc/dwc-dp/event",
+        "url": "https://github.com/gbif/dwc-dp/blob/master/dwc-dp/0.1/table-schemas/event.json",
+        "title": "Event",
+        "description": "An action, process, or set of circumstances occurring at a dcterms:Location during a period of time.",
+        "fields": [
+          {
+            "name": "eventID",
+            "title": "Event ID",
+            "description": "An identifier for a dwc:Event.",
+            "type": "string",
+            "format": "default",
+            "comments": "Recommended best practice is to use a globally unique identifier.",
+            "examples": "",
+            "namespace": "dwc",
+            "iri": "http://rs.tdwg.org/dwc/terms/eventID",
+            "constraints": {
+              "required": true,
+              "unique": true
+            }
+          },
+          {
+            "name": "eventDate",
+            "title": "Event Date",
+            "description": "A date or time interval during which a dwc:Event occurred.",
+            "type": "string",
+            "format": "default",
+            "comments": "For gathering dwc:Events, this is the date-time when the gathering took place.",
+            "examples": "`1963-03-08T14:07-06:00` (8 Mar 1963 at 2:07pm in the time zone six hours earlier than UTC); `2009-02-20T08:40Z` (20 February 2009 8:40am UTC); `2018-08-29T15:19` (3:19pm local time on 29 August 2018); `1809-02-12` (some time during 12 February 1809); `1906-06` (some time in June 1906); `1971` (some time in the year 1971); `2007-03-01T13:00:00Z/2008-05-11T15:30:00Z` (some time during the interval between 1 March 2007 1pm UTC and 11 May 2008 3:30pm UTC); `1900/1909` (some time during the interval between the beginning of the year 1900 and the end of the year 1909); `2007-11-13/15` (some time in the interval between 13 November 2007 and 15 November 2007)",
+            "namespace": "dwc",
+            "iri": "http://rs.tdwg.org/dwc/terms/eventDate"
+          },
+          {
+            "name": "decimalLatitude",
+            "title": "Decimal Latitude",
+            "description": "A geographic latitude (in decimal degrees, using the spatial reference system given in dwc:geodeticDatum) of the geographic center of a dcterms:Location.",
+            "type": "number",
+            "format": "default",
+            "comments": "Positive values are north of the Equator, negative values are south of it. Legal values lie between -90 and 90, inclusive.",
+            "examples": "`-41.0983423`",
+            "constraints": {
+              "required": false,
+              "minimum": -90,
+              "maximum": 90
+            },
+            "namespace": "dwc",
+            "iri": "http://rs.tdwg.org/dwc/terms/decimalLatitude"
+          },
+          {
+            "name": "decimalLongitude",
+            "title": "Decimal Longitude",
+            "description": "A geographic longitude (in decimal degrees, using the spatial reference system given in dwc:geodeticDatum) of the geographic center of a dcterms:Location.",
+            "type": "number",
+            "format": "default",
+            "comments": "Positive values are east of the Greenwich Meridian, negative values are west of it. Legal values lie between -180 and 180, inclusive.",
+            "examples": "`-121.1761111`",
+            "constraints": {
+              "required": false,
+              "minimum": -180,
+              "maximum": 180
+            },
+            "namespace": "dwc",
+            "iri": "http://rs.tdwg.org/dwc/terms/decimalLongitude"
+          }
+        ],
+        "primaryKey": "eventID",
+        "foreignKeys": []
+      }
+    },
+    {
+      "name": "identification",
+      "path": "data/identification.tsv",
+      "schema": {
+        "name": "identification",
+        "identifier": "http://rs.tdwg.org/dwc/dwc-dp/identification",
+        "url": "https://github.com/gbif/dwc-dp/blob/master/dwc-dp/0.1/table-schemas/identification.json",
+        "title": "Identification",
+        "description": "A taxonomic determination (i.e., the assignment of dwc:Taxa to dwc:Organisms).",
+        "fields": [
+          {
+            "name": "identificationID",
+            "title": "Identification ID",
+            "description": "An identifier for a dwc:Identification.",
+            "type": "string",
+            "format": "default",
+            "comments": "Recommended best practice is to use a globally unique identifier.",
+            "examples": "",
+            "namespace": "dwc",
+            "iri": "http://rs.tdwg.org/dwc/terms/identificationID",
+            "constraints": {
+              "required": true,
+              "unique": true
+            }
+          },
+          {
+            "name": "basedOnNucleotideSequenceID",
+            "title": "Based On Nucleotide Sequence ID",
+            "description": "An identifier for a NucleotideSequence based on which a dwc:Identification was made.",
+            "type": "string",
+            "format": "default",
+            "comments": "Recommended best practice is to use a globally unique identifier.",
+            "examples": "",
+            "namespace": "dwcdp",
+            "iri": ""
+          },
+          {
+            "name": "higherClassificationName",
+            "title": "Higher Classification Name",
+            "description": "A full scientific name at a higher rank than the taxonRank of dwc:scientificName.",
+            "type": "string",
+            "format": "default",
+            "comments": "A higherClassificationName must have a corresponding higherClassificationRank.",
+            "examples": "`Animalia` (higherClassificationName) with `kingdom` (higherClassificationRank); `Laphriinae`  (higherClassificationName) with `subfamily` (higherClassificationRank)",
+            "namespace": "dwcdp",
+            "iri": ""
+          },
+          {
+            "name": "higherClassificationRank",
+            "title": "Higher Classification Rank",
+            "description": "A taxonomic rank of the higherClassificationName.",
+            "type": "string",
+            "format": "default",
+            "comments": "A higherClassificationRank must have a corresponding higherClassificationName.",
+            "examples": "`Acanthaceae` (higherClassificationName) with `family` (higherClassificationRank); `Pyrenomycetes` (higherClassificationName) with `class` (higherClassificationRank)",
+            "namespace": "dwcdp",
+            "iri": ""
+          },
+          {
+            "name": "scientificName",
+            "title": "Scientific Name",
+            "description": "A full scientific name, with authorship and date information if known. When forming part of a dwc:Identification, this should be the name in lowest level taxonomic rank that can be determined. This term should not contain identification qualifications, which should instead be supplied in dwc:verbatimIdentification.",
+            "type": "string",
+            "format": "default",
+            "comments": "",
+            "examples": "`Coleoptera` (order); `Vespertilionidae` (family); `Manis` (genus); `Ctenomys sociabilis` (genus + specificEpithet); `Ambystoma tigrinum diaboli` (genus + specificEpithet + infraspecificEpithet); `Roptrocerus typographi (Györfi, 1952)` (genus + specificEpithet + scientificNameAuthorship); `Quercus agrifolia var. oxyadenia (Torr.) J.T. Howell` (genus + specificEpithet + taxonRank + infraspecificEpithet + scientificNameAuthorship)",
+            "namespace": "dwc",
+            "iri": "http://rs.tdwg.org/dwc/terms/scientificName"
+          },
+          {
+            "name": "taxonID",
+            "title": "Taxon ID",
+            "description": "An identifier for a dwc:Taxon.",
+            "type": "string",
+            "format": "default",
+            "comments": "Recommended best practice is to use a globally unique identifier.",
+            "examples": "`8fa58e08-08de-4ac1-b69c-1235340b7001`; `32567`; `https://www.gbif.org/species/212`",
+            "namespace": "dwc",
+            "iri": "http://rs.tdwg.org/dwc/terms/taxonID"
+          }
+        ],
+        "primaryKey": "identificationID",
+        "foreignKeys": [
+          {
+            "fields": "basedOnNucleotideSequenceID",
+            "reference": {
+              "resource": "nucleotide-sequence",
+              "fields": "nucleotideSequenceID"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "molecular-protocol",
+      "path": "data/molecular-protocol.tsv",
+      "schema": {
+        "name": "molecular-protocol",
+        "identifier": "http://rs.tdwg.org/dwc/dwc-dp/molecular-protocol",
+        "url": "https://github.com/gbif/dwc-dp/blob/master/dwc-dp/0.1/table-schemas/molecular-protocol.json",
+        "title": "MolecularProtocol",
+        "description": "A protocol used to derive and identify a nucleotide sequence from a dwc:MaterialEntity.",
+        "fields": [
+          {
+            "name": "molecularProtocolID",
+            "title": "Molecular Protocol ID",
+            "description": "An identifier for a MolecularProtocol.",
+            "type": "string",
+            "format": "default",
+            "comments": "Recommended best practice is to use a globally unique identifier.",
+            "examples": "",
+            "namespace": "dwcdp",
+            "iri": "",
+            "constraints": {
+              "required": true,
+              "unique": true
+            }
+          },
+          {
+            "name": "target_gene",
+            "title": "target_gene",
+            "description": "Targeted gene or locus name for marker gene studies.",
+            "type": "string",
+            "format": "default",
+            "comments": "",
+            "examples": "`16S rRNA`; `18S rRNA`; `nif`; `amoA`; `rpo`",
+            "namespace": "mixs",
+            "iri": "https://w3id.org/mixs/0000044"
+          },
+          {
+            "name": "target_subfragment",
+            "title": "target_subfragment",
+            "description": "Name of subfragment of a gene or locus. Important to e.g. identify special regions on marker genes like V6 on 16S rRNA.",
+            "type": "string",
+            "format": "default",
+            "comments": "",
+            "examples": "`V6`; `V9`; `ITS`",
+            "namespace": "mixs",
+            "iri": "https://w3id.org/mixs/0000045"
+          },
+          {
+            "name": "pcr_primer_forward",
+            "title": "pcr_primer_forward",
+            "description": "Forward PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment. If multiple multiple forward or reverse primers are present in a single PCR reaction, there should be a full row for each of these linked to the same dwc:Occurrence. The primer sequence should be reported in uppercase letters.",
+            "type": "string",
+            "format": "default",
+            "comments": "",
+            "examples": "`GGACTACHVGGGTWTCTAAT`",
+            "namespace": "gbif",
+            "iri": "http://rs.gbif.org/terms/pcr_primer_forward"
+          },
+          {
+            "name": "pcr_primer_reverse",
+            "title": "pcr_primer_reverse",
+            "description": "Reverse PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment. If multiple multiple forward or reverse primers are present in a single PCR reaction, there should be a full row for each of these linked to the same dwc:Occurrence. The primer sequence should be reported in uppercase letters.",
+            "type": "string",
+            "format": "default",
+            "comments": "",
+            "examples": "`GGACTACHVGGGTWTCTAAT`",
+            "namespace": "gbif",
+            "iri": "http://rs.gbif.org/terms/pcr_primer_reverse"
+          },
+          {
+            "name": "pcr_primer_name_forward",
+            "title": "pcr_primer_name_forward",
+            "description": "Name of the forward PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment. If multiple multiple forward or reverse primers are present in a single PCR reaction, there should be a full row for each of these linked to the same dwc:Occurrence.",
+            "type": "string",
+            "format": "default",
+            "comments": "",
+            "examples": "`jgLCO1490`",
+            "namespace": "gbif",
+            "iri": "http://rs.gbif.org/terms/pcr_primer_name_forward"
+          },
+          {
+            "name": "pcr_primer_name_reverse",
+            "title": "pcr_primer_name_reverse",
+            "description": "Name of the reverse PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment. If multiple multiple forward or reverse primers are present in a single PCR reaction, there should be a full row for each of these linked to the same dwc:Occurrence.",
+            "type": "string",
+            "format": "default",
+            "comments": "",
+            "examples": "`jgHCO2198`",
+            "namespace": "gbif",
+            "iri": "http://rs.gbif.org/terms/pcr_primer_name_reverse"
+          },
+          {
+            "name": "pcr_primer_reference",
+            "title": "pcr_primer_reference",
+            "description": "Reference for the PCR primers that were used to amplify the sequence of the targeted gene, locus or subfragment.",
+            "type": "string",
+            "format": "default",
+            "comments": "",
+            "examples": "`https://doi.org/10.1186/1742-9994-10-34`",
+            "namespace": "gbif",
+            "iri": "http://rs.gbif.org/terms/pcr_primer_reference"
+          },
+          {
+            "name": "sop",
+            "title": "sop",
+            "description": "Standard operating procedures used in assembly and/or annotation of genomes, metagenomes or environmental sequences.",
+            "type": "string",
+            "format": "default",
+            "comments": "",
+            "examples": "`http://press.igsb.anl.gov/earthmicrobiome/protocols-and-standards/its/`",
+            "namespace": "mixs",
+            "iri": "https://w3id.org/mixs/0000090"
+          },
+          {
+            "name": "otu_db",
+            "title": "otu_db",
+            "description": "Reference database (i.e. sequences not generated as part of the current study) used to cluster new genomes in \"species-level\" OTUs, if any.",
+            "type": "string",
+            "format": "default",
+            "comments": "",
+            "examples": "`NCBI Viral RefSeq;83`",
+            "namespace": "mixs",
+            "iri": "https://w3id.org/mixs/0000087"
+          },
+          {
+            "name": "lib_layout",
+            "title": "lib_layout",
+            "description": "Specify whether to expect single, paired, or other configuration of reads.",
+            "type": "string",
+            "format": "default",
+            "comments": "",
+            "examples": "`paired`",
+            "namespace": "mixs",
+            "iri": "https://w3id.org/mixs/0000041"
+          },
+          {
+            "name": "otu_class_appr",
+            "title": "otu_class_appr",
+            "description": "Cutoffs and approach used when clustering new UViGs in \"species-level\" OTUs. Note that results from standard 95% ANI / 85% AF clustering should be provided alongside OTUS defined from another set of thresholds, even if the latter are the ones primarily used during the analysis.",
+            "type": "string",
+            "format": "default",
+            "comments": "",
+            "examples": "`95% ANI;85% AF; greedy incremental clustering`",
+            "namespace": "mixs",
+            "iri": "https://w3id.org/mixs/0000085"
+          },
+          {
+            "name": "otu_seq_comp_appr",
+            "title": "otu_seq_comp_appr",
+            "description": "Tool and thresholds used to compare sequences when computing \"species-level\" OTUs.",
+            "type": "string",
+            "format": "default",
+            "comments": "",
+            "examples": "`blastn;2.6.0+;e-value cutoff: 0.001`",
+            "namespace": "mixs",
+            "iri": "https://w3id.org/mixs/0000086"
+          },
+          {
+            "name": "biotic_relationship",
+            "title": "biotic_relationship",
+            "description": "Description of relationship(s) between the subject organism and other organism(s) it is associated with. E.g., parasite on species X; mutualist with species Y. The target organism is the subject of the relationship, and the other organism(s) is the object.",
+            "type": "string",
+            "format": "default",
+            "comments": "",
+            "examples": "`free living`",
+            "namespace": "mixs",
+            "iri": "https://w3id.org/mixs/0000028"
+          },
+          {
+            "name": "env_medium",
+            "title": "env_medium",
+            "description": "In this field, report which environmental material or materials (pipe separated) immediately surrounded your sample or specimen prior to sampling, using one or more subclasses of ENVO’s environmental material class: http://purl.obolibrary.org/obo/ENVO_00010483. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a fish swimming in the upper 100 m of the Atlantic Ocean, consider: ocean water [ENVO:00002151]. Example: Annotating a duck on a pond consider: pond water [ENVO:00002228]|air ENVO_00002005. If needed, request new terms on the ENVO tracker, identified here: http://www.obofoundry.org/ontology/envo.html.",
+            "type": "string",
+            "format": "default",
+            "comments": "",
+            "examples": "`soil [ENVO:00001998]`",
+            "namespace": "mixs",
+            "iri": "https://w3id.org/mixs/0000014"
+          }
+        ],
+        "primaryKey": "molecularProtocolID",
+        "foreignKeys": []
+      }
+    },
+    {
+      "name": "nucleotide-analysis",
+      "path": "data/nucleotide-analysis.tsv",
+      "schema": {
+        "name": "nucleotide-analysis",
+        "identifier": "http://rs.tdwg.org/dwc/dwc-dp/nucleotide-analysis",
+        "url": "https://github.com/gbif/dwc-dp/blob/master/dwc-dp/0.1/table-schemas/nucleotide-analysis.json",
+        "title": "NucleotideAnalysis",
+        "description": "A link between a NucleotideSequence and a dwc:Event and a dwc:MaterialEntity from which it was derived, using a specified Protocol.",
+        "fields": [
+          {
+            "name": "nucleotideAnalysisID",
+            "title": "Nucleotide Analysis ID",
+            "description": "An identifier for a NucleotideAnalysis.",
+            "type": "string",
+            "format": "default",
+            "comments": "Recommended best practice is to use a globally unique identifier.",
+            "examples": "",
+            "namespace": "dwcdp",
+            "iri": "",
+            "constraints": {
+              "required": true,
+              "unique": true
+            }
+          },
+          {
+            "name": "eventID",
+            "title": "Event ID",
+            "description": "An identifier for a dwc:Event.",
+            "type": "string",
+            "format": "default",
+            "comments": "Recommended best practice is to use a globally unique identifier.",
+            "examples": "",
+            "namespace": "dwcdp",
+            "iri": "",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "molecularProtocolID",
+            "title": "Molecular Protocol ID",
+            "description": "An identifier for a MolecularProtocol.",
+            "type": "string",
+            "format": "default",
+            "comments": "Recommended best practice is to use a globally unique identifier.",
+            "examples": "",
+            "namespace": "dwcdp",
+            "iri": "",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "nucleotideSequenceID",
+            "title": "Nucleotide Sequence ID",
+            "description": "An identifier for a NucleotideSequence.",
+            "type": "string",
+            "format": "default",
+            "comments": "Recommended best practice is to use a globally unique identifier.",
+            "examples": "",
+            "namespace": "dwcdp",
+            "iri": ""
+          },
+          {
+            "name": "readCount",
+            "title": "Read Count",
+            "description": "A number of reads for a NucleotideSequence in a NucleotideAnalysis.",
+            "type": "integer",
+            "format": "default",
+            "comments": "",
+            "examples": "",
+            "namespace": "dwcdp",
+            "iri": ""
+          },
+          {
+            "name": "totalReadCount",
+            "title": "Total Read Count",
+            "description": "A total number of reads in a NucleotideAnalysis.",
+            "type": "integer",
+            "format": "default",
+            "comments": "",
+            "examples": "",
+            "namespace": "dwcdp",
+            "iri": ""
+          }
+        ],
+        "primaryKey": "nucleotideAnalysisID",
+        "foreignKeys": [
+          {
+            "fields": "eventID",
+            "reference": {
+              "resource": "event",
+              "fields": "eventID"
+            }
+          },
+          {
+            "fields": "molecularProtocolID",
+            "reference": {
+              "resource": "molecular-protocol",
+              "fields": "molecularProtocolID"
+            }
+          },
+          {
+            "fields": "nucleotideSequenceID",
+            "reference": {
+              "resource": "nucleotide-sequence",
+              "fields": "nucleotideSequenceID"
+            }
+          }
+        ],
+        "uniqueKeys": [],
+        "uniqueNulls": true
+      }
+    },
+    {
+      "name": "nucleotide-sequence",
+      "path": "data/nucleotide-sequence.tsv",
+      "schema": {
+        "name": "nucleotide-sequence",
+        "identifier": "http://rs.tdwg.org/dwc/dwc-dp/nucleotide-sequence",
+        "url": "https://github.com/gbif/dwc-dp/blob/master/dwc-dp/0.1/table-schemas/nucleotide-sequence.json",
+        "title": "NucleotideSequence",
+        "description": "A digital representation of a nucleotide sequence.",
+        "fields": [
+          {
+            "name": "nucleotideSequenceID",
+            "title": "Nucleotide Sequence ID",
+            "description": "An identifier for a NucleotideSequence.",
+            "type": "string",
+            "format": "default",
+            "comments": "Recommended best practice is to use a globally unique identifier.",
+            "examples": "",
+            "namespace": "dwcdp",
+            "iri": "",
+            "constraints": {
+              "required": true,
+              "unique": true
+            }
+          },
+          {
+            "name": "nucleotideSequence",
+            "title": "Nucleotide Sequence",
+            "description": "A string representing nucleotide base pairs.",
+            "type": "string",
+            "format": "default",
+            "comments": "",
+            "examples": "",
+            "namespace": "dwcdp",
+            "iri": ""
+          }
+        ],
+        "primaryKey": "nucleotideSequenceID",
+        "foreignKeys": []
+      }
+    }
+  ]
+}
