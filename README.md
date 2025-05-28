@@ -31,40 +31,7 @@ This lightweight, browser-based tool lets you **visualize table relationships in
 2. Click **“Choose File”** and select your `datapackage.json`
 3. View the interactive diagram of table relationships!
 
----
-
-## 🛠 For Developers
-
-### To run locally:
-1. Clone this repo
-2. Open `index.html` in any modern browser
-3. Done!
-
-### To deploy:
-- Push to GitHub
-- Go to **Settings → Pages**
-- Set source to `main` branch and root folder
-- Done! Your tool is now live
-
----
 
 ## 💡 Example Input
 
-Upload a Frictionless-style `datapackage.json` file with foreign key definitions like:
-
-```json
-{
-  "resources": [
-    {
-      "name": "occurrence",
-      "schema": {
-        "foreignKeys": [
-          {
-            "fields": "eventID",
-            "reference": { "resource": "event", "fields": "eventID" }
-          }
-        ]
-      }
-    }
-  ]
-}
+Upload a DwC-DP `datapackage.json` file. Example of [BROKE-West data test](example/datapackage-broke-west-fish-v9.json).
